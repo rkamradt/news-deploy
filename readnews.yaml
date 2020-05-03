@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: readnews-deployment
+  labels:
+    app: readnews
+spec:
+  selector:
+    matchLabels:
+      app: readnews
+  template:
+    metadata:
+      labels:
+        app: readnews
+    spec:
+      containers:
+      - name: readnews
+        image: docker.io/rlkamradt/readnews:latest
+        ports:
+        - containerPort: 8080
+        env:
+          - name: MONGO_USER
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: username
+          - name: MONGO_PASS
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: password
+          - name: MONGO_HOST
+            value: mongodb-0.mongodb           
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: readnews-service
+spec:
+  type: ClusterIP
+  selector:
+    app: readnews
+  ports:
+  - port: 8080
+    targetPort: 8080

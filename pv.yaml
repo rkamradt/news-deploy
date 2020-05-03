@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: gluster-pv
+  labels:
+    pv: gluster-pv
+spec:
+  capacity:
+    storage: 130Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  glusterfs:
+    path: /gv0
+    endpoints: glusterfs-cluster 

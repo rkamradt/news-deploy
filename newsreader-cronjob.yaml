@@ -1,0 +1,35 @@
+apiVersion: batch/v1beta1
+kind: CronJob 
+metadata:
+  name:
+    newsreader-cronjob
+  labels:
+    app: newsreader
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure      
+          containers:
+          - name: newsreader
+            image: docker.io/rlkamradt/newsreader:latest
+            env:
+              - name: MONGO_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: mongo-secret
+                    key: username
+              - name: MONGO_PASS
+                valueFrom:
+                  secretKeyRef:
+                    name: mongo-secret
+                    key: password
+              - name: NEWSAPI_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: newsapi-key
+                    key: key
+              - name: MONGO_SERVER
+                value: mongodb-0.mongodb 

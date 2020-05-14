@@ -13,7 +13,17 @@ spec:
           serviceName: readnews-service
           servicePort: 8080
         path: /
+  - host: readnewsblock.local
+    http:
+      paths:
+      - backend:
+          serviceName: readnewsblock-service
+          servicePort: 8080
+        path: /
   tls:
   - hosts:
+    - readnewsblock.local
+    secretName: readnewsblock-cert
+  - hosts:
     - readnews.local
-    secretName: myingress-cert
+    secretName: readnews-cert

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: newsreader
 spec:
-  schedule: "0 * * * *"
+  schedule: "7 * * * *"
   jobTemplate:
     spec:
       template:

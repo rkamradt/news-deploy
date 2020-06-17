@@ -20,10 +20,20 @@ spec:
           serviceName: readnewsblock-service
           servicePort: 8080
         path: /
+  - host: readnewsgo.local
+    http:
+      paths:
+      - backend:
+          serviceName: readnewsgo-service
+          servicePort: 8080
+        path: /
   tls:
   - hosts:
     - readnewsblock.local
     secretName: readnewsblock-cert
+  - hosts:
+    - readnewsgo.local
+    secretName: readnewsgo-cert
   - hosts:
     - readnews.local
     secretName: readnews-cert

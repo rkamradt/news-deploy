@@ -44,7 +44,7 @@ kind: Service
 metadata:
   name: readnews-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: readnews
   ports:

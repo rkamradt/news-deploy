@@ -31,10 +31,17 @@ spec:
         volumeMounts:
         - name: mongodb-data
           mountPath: /data/db
-      volumes:
-      - name: mongodb-data
-        persistentVolumeClaim:
-          claimName: gluster-claim 
+  volumeClaimTemplates:
+  - metadata:
+      name: mongodb-data
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "standard"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+
 ---
 apiVersion: v1
 kind: Service

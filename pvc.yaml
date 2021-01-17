@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: gluster-claim
+  name: task-pv-claim
 spec:
   accessModes:
     - ReadWriteMany

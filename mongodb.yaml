@@ -34,7 +34,7 @@ spec:
       volumes:
       - name: mongodb-data
         persistentVolumeClaim:
-          claimName: gluster-claim 
+          claimName: task-pv-claim 
 ---
 apiVersion: v1
 kind: Service
